@@ -41,16 +41,18 @@ if [ -d "$VENV_DIR" ]; then
         package_name=$(echo "$package" | sed 's/[>=<].*//' | xargs)
         
         if ! pip show "$package_name" &> /dev/null; then
-            echo -e "${YELLOW}Missing package: $package_name${NC}"
-            MISSING_PACKAGES=true
-            break
+            if [ "$MISSING_PACKAGES" = false ]; then
+                echo -e "${YELLOW}Missing packages detected:${NC}"
+                MISSING_PACKAGES=true
+            fi
+            echo "  - $package_name"
         fi
     done < "$PROJECT_DIR/requirements.txt"
     
     if [ "$MISSING_PACKAGES" = false ]; then
         echo -e "${GREEN}All required packages are already installed.${NC}"
     else
-        echo "Installing missing packages..."
+        echo -e "\n${YELLOW}Installing missing packages...${NC}"
         pip install -r "$PROJECT_DIR/requirements.txt"
         echo -e "${GREEN}Packages installed successfully.${NC}"
     fi
