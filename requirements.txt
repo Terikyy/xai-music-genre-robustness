@@ -1,0 +1,8 @@
+# Data processing and visualization
+numpy
+pandas
+matplotlib
+seaborn
+
+# Audio processing
+librosa
