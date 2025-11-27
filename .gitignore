@@ -1,0 +1,27 @@
+# Raw data be downloaded from https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification/data
+# All other data content is reproducible from code
+/data/
+
+# Trained models
+results/models/
+
+# Python
+__pycache__/
+*.py[cod]
+.Python
+
+# Virtual environments
+venv/
+env/
+.venv
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Logs
+*.log
