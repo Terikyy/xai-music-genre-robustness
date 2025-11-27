@@ -6,3 +6,8 @@ seaborn
 
 # Audio processing
 librosa
+soundfile
+
+# Machine learning utilities
+scikit-learn
+tqdm
