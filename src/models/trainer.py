@@ -40,8 +40,9 @@ class GenreClassifierTrainer:
         print(f"Using device: {self.device}")
     
     def train(self, X_train, y_train, X_val, y_val, 
-              epochs=50, batch_size=32, learning_rate=0.001, 
-              model_name='genre_cnn', patience=10):
+              epochs=30, batch_size=32, learning_rate=0.0005, 
+              model_name='genre_cnn', patience=10,
+              weight_decay=1e-4, scheduler_factor=0.3, scheduler_patience=5):
         """
         Train the model.
         
@@ -50,11 +51,14 @@ class GenreClassifierTrainer:
             y_train: Training labels (numpy array)
             X_val: Validation spectrograms
             y_val: Validation labels
-            epochs: Maximum number of epochs
-            batch_size: Batch size
-            learning_rate: Initial learning rate
+            epochs: Maximum number of epochs (default: 30)
+            batch_size: Batch size (default: 32)
+            learning_rate: Initial learning rate (default: 0.0005)
             model_name: Name for saved models
             patience: Early stopping patience
+            weight_decay: L2 regularization weight decay (default: 1e-4)
+            scheduler_factor: Factor by which to reduce LR (default: 0.3)
+            scheduler_patience: Epochs to wait before reducing LR (default: 5)
             
         Returns:
             Training history
@@ -63,6 +67,7 @@ class GenreClassifierTrainer:
         print(f"Training samples: {len(X_train)}")
         print(f"Validation samples: {len(X_val)}")
         print(f"Input shape: {X_train.shape[1:]}")
+        print('-' * 40)
         
         # Prepare data loaders
         # PyTorch expects (batch, channels, height, width)
@@ -84,9 +89,9 @@ class GenreClassifierTrainer:
         
         # Setup training
         criterion = nn.CrossEntropyLoss()
-        optimizer = optim.Adam(self.model.parameters(), lr=learning_rate)
+        optimizer = optim.Adam(self.model.parameters(), lr=learning_rate, weight_decay=weight_decay)
         scheduler = optim.lr_scheduler.ReduceLROnPlateau(
-            optimizer, mode='min', factor=0.5, patience=3
+            optimizer, mode='min', factor=scheduler_factor, patience=scheduler_patience
         )
         
         best_val_acc = 0.0

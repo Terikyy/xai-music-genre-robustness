@@ -32,7 +32,7 @@ class GenreClassifierCNN(nn.Module):
         self.conv1_2 = nn.Conv2d(32, 32, kernel_size=3, padding=1)
         self.bn1_2 = nn.BatchNorm2d(32)
         self.pool1 = nn.MaxPool2d(kernel_size=2, stride=2)
-        self.dropout1 = nn.Dropout2d(0.25)
+        self.dropout1 = nn.Dropout2d(0.15)
         
         # Block 2: Mid-level features
         self.conv2_1 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
@@ -40,7 +40,7 @@ class GenreClassifierCNN(nn.Module):
         self.conv2_2 = nn.Conv2d(64, 64, kernel_size=3, padding=1)
         self.bn2_2 = nn.BatchNorm2d(64)
         self.pool2 = nn.MaxPool2d(kernel_size=2, stride=2)
-        self.dropout2 = nn.Dropout2d(0.25)
+        self.dropout2 = nn.Dropout2d(0.15)
         
         # Block 3: High-level features
         self.conv3_1 = nn.Conv2d(64, 128, kernel_size=3, padding=1)
@@ -48,7 +48,7 @@ class GenreClassifierCNN(nn.Module):
         self.conv3_2 = nn.Conv2d(128, 128, kernel_size=3, padding=1)
         self.bn3_2 = nn.BatchNorm2d(128)
         self.pool3 = nn.MaxPool2d(kernel_size=2, stride=2)
-        self.dropout3 = nn.Dropout2d(0.25)
+        self.dropout3 = nn.Dropout2d(0.15)
         
         # Block 4: Deep features (important for Grad-CAM)
         self.conv4_1 = nn.Conv2d(128, 256, kernel_size=3, padding=1)
@@ -56,16 +56,16 @@ class GenreClassifierCNN(nn.Module):
         self.conv4_2 = nn.Conv2d(256, 256, kernel_size=3, padding=1)
         self.bn4_2 = nn.BatchNorm2d(256)
         self.pool4 = nn.MaxPool2d(kernel_size=2, stride=2)
-        self.dropout4 = nn.Dropout2d(0.25)
+        self.dropout4 = nn.Dropout2d(0.15)
         
         # Global pooling and classification
         self.global_pool = nn.AdaptiveAvgPool2d((1, 1))
         self.fc1 = nn.Linear(256, 512)
         self.bn_fc1 = nn.BatchNorm1d(512)
-        self.dropout_fc1 = nn.Dropout(0.5)
+        self.dropout_fc1 = nn.Dropout(0.4)
         self.fc2 = nn.Linear(512, 256)
         self.bn_fc2 = nn.BatchNorm1d(256)
-        self.dropout_fc2 = nn.Dropout(0.5)
+        self.dropout_fc2 = nn.Dropout(0.4)
         self.fc3 = nn.Linear(256, num_classes)
         
         # Store intermediate features for Grad-CAM
