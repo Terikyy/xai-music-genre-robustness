@@ -5,6 +5,9 @@
 # Trained models
 results/models/
 
+# Grad-CAM outputs
+results/figures/gradcam/
+
 # Python
 __pycache__/
 *.py[cod]

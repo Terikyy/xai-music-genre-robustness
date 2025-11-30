@@ -15,6 +15,9 @@ tqdm
 # Adversarial robustness
 adversarial-robustness-toolbox
 
+# Explainability
+grad-cam
+
 # Deep learning
 # NOTE: PyTorch is NOT included here - install separately:
 #   GPU: pip install -r requirements-gpu.txt
