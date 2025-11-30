@@ -1,0 +1,93 @@
+{
+  "model_name": "GenreClassifierCNN",
+  "dataset": "GTZAN",
+  "num_samples_tested": 200,
+  "fgsm_results": {
+    "0.001": {
+      "clean_accuracy": 0.82,
+      "adversarial_accuracy": 0.735,
+      "accuracy_drop": 0.08499999999999996,
+      "attack_success_rate": 0.10365853658536582
+    },
+    "0.002": {
+      "clean_accuracy": 0.82,
+      "adversarial_accuracy": 0.66,
+      "accuracy_drop": 0.15999999999999992,
+      "attack_success_rate": 0.19512195121951212
+    },
+    "0.005": {
+      "clean_accuracy": 0.82,
+      "adversarial_accuracy": 0.37,
+      "accuracy_drop": 0.44999999999999996,
+      "attack_success_rate": 0.548780487804878
+    },
+    "0.01": {
+      "clean_accuracy": 0.82,
+      "adversarial_accuracy": 0.12,
+      "accuracy_drop": 0.7,
+      "attack_success_rate": 0.8536585365853658
+    },
+    "0.02": {
+      "clean_accuracy": 0.82,
+      "adversarial_accuracy": 0.0,
+      "accuracy_drop": 0.82,
+      "attack_success_rate": 1.0
+    },
+    "0.05": {
+      "clean_accuracy": 0.82,
+      "adversarial_accuracy": 0.0,
+      "accuracy_drop": 0.82,
+      "attack_success_rate": 1.0
+    },
+    "0.1": {
+      "clean_accuracy": 0.82,
+      "adversarial_accuracy": 0.005,
+      "accuracy_drop": 0.815,
+      "attack_success_rate": 0.9939024390243902
+    }
+  },
+  "pgd_results": {
+    "0.001": {
+      "clean_accuracy": 0.82,
+      "adversarial_accuracy": 0.73,
+      "accuracy_drop": 0.08999999999999997,
+      "attack_success_rate": 0.10975609756097558
+    },
+    "0.002": {
+      "clean_accuracy": 0.82,
+      "adversarial_accuracy": 0.655,
+      "accuracy_drop": 0.16499999999999992,
+      "attack_success_rate": 0.20121951219512188
+    },
+    "0.005": {
+      "clean_accuracy": 0.82,
+      "adversarial_accuracy": 0.31,
+      "accuracy_drop": 0.51,
+      "attack_success_rate": 0.6219512195121951
+    },
+    "0.01": {
+      "clean_accuracy": 0.82,
+      "adversarial_accuracy": 0.025,
+      "accuracy_drop": 0.7949999999999999,
+      "attack_success_rate": 0.9695121951219512
+    },
+    "0.02": {
+      "clean_accuracy": 0.82,
+      "adversarial_accuracy": 0.0,
+      "accuracy_drop": 0.82,
+      "attack_success_rate": 1.0
+    },
+    "0.05": {
+      "clean_accuracy": 0.82,
+      "adversarial_accuracy": 0.0,
+      "accuracy_drop": 0.82,
+      "attack_success_rate": 1.0
+    },
+    "0.1": {
+      "clean_accuracy": 0.82,
+      "adversarial_accuracy": 0.0,
+      "accuracy_drop": 0.82,
+      "attack_success_rate": 1.0
+    }
+  }
+}
