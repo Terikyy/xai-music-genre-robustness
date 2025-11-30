@@ -85,7 +85,4 @@ The script will:
 
 ## Documentation 
 
-More detailed documentation and results analysis can be found here:  
-- [Documentation](/docs/documentation.md)
-- [Methodology](/docs/methodology.md)
-- [Results Analyisis](/docs/results_analysis.md)
+More detailed documentation and results analysis can be found in [Documentation](/docs/documentation.md).
