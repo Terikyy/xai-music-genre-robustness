@@ -12,6 +12,10 @@ soundfile
 scikit-learn
 tqdm
 
+# Adversarial robustness
+adversarial-robustness-toolbox
+
 # Deep learning
-torch>=2.0.0
-torchvision>=0.15.0
+# NOTE: PyTorch is NOT included here - install separately:
+#   GPU: pip install -r requirements-gpu.txt
+#   CPU: pip install -r requirements-cpu.txt

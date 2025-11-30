@@ -1,0 +1,8 @@
+# CPU-only PyTorch
+# Installation: pip install -r requirements-cpu.txt
+
+torch
+torchvision
+
+# Note: This installs the CPU-only version from PyPI
+# For GPU support, use requirements-gpu.txt instead

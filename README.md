@@ -22,6 +22,12 @@ How robust is a CNN for music genre classification against noise perturbations, 
 
 ## Setup
 
+### Requirements
+
+- **Python Version:** 3.10 - 3.13 (tested on Python 3.12)
+- **PyTorch:** CPU or GPU version (CUDA 11.8 for GPU support)
+- **Operating System:** Linux, macOS, or Windows (WSL required for automated setup script)
+
 ### Option 1: Automated Setup (Recommended)
 
 Run the setup script to automatically install dependencies and prepare the environment:
@@ -31,6 +37,12 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
+The script will:
+- Create a virtual environment
+- Install base dependencies from `requirements.txt`
+- Prompt you to choose between CPU or GPU (CUDA) PyTorch installation
+- Download the GTZAN dataset from Kaggle (requires Kaggle API token)
+
 ### Option 2: Manual Setup
 
 1. **Create a virtual environment:**
@@ -39,13 +51,27 @@ chmod +x setup.sh
    source venv/bin/activate
    ```
 
-2. **Install dependencies:**
+2. **Install base dependencies:**
    ```bash
    pip install --upgrade pip
    pip install -r requirements.txt
    ```
 
-3. **Download the dataset:**
+3. **Install PyTorch:**
+   
+   Choose one based on your hardware:
+   
+   - **For GPU (CUDA 11.8):**
+     ```bash
+     pip install -r requirements-gpu.txt
+     ```
+   
+   - **For CPU only:**
+     ```bash
+     pip install -r requirements-cpu.txt
+     ```
+
+4. **Download the dataset:**
    - Download the [GTZAN Dataset](https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification/data)
    - Extract it to `./data/raw/` (create the directory if it doesn't exist yet)
    - The file structure should look like this:

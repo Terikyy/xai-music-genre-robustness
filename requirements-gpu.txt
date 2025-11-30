@@ -1,0 +1,7 @@
+# GPU-enabled PyTorch for CUDA 12.6
+# Use this file if you have an NVIDIA GPU with CUDA support
+# Installation: pip install -r requirements-gpu.txt
+
+--index-url https://download.pytorch.org/whl/cu118
+torch
+torchvision

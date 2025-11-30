@@ -26,35 +26,68 @@ echo -e "${GREEN}=== XAI Music Genre Robustness Setup ===${NC}\n"
 # ============================
 echo -e "${GREEN}[1/3] Setting up Python environment...${NC}"
 
-if [ -d "$VENV_DIR" ]; then
-    echo -e "${YELLOW}Virtual environment already exists.${NC}"
-    source "$VENV_DIR/bin/activate"
+# Function to check if packages from a requirements file are installed
+check_packages() {
+    local req_file=$1
+    local missing=false
     
-    # Check if all packages are installed
-    echo "Checking installed packages..."
-    MISSING_PACKAGES=false
     while IFS= read -r package || [ -n "$package" ]; do
-        # Skip empty lines and comments
-        [[ -z "$package" || "$package" =~ ^#.*$ ]] && continue
+        # Skip empty lines, comments, and pip index URLs
+        [[ -z "$package" || "$package" =~ ^#.*$ || "$package" =~ ^--.*$ ]] && continue
         
         # Extract package name (without version specifiers)
         package_name=$(echo "$package" | sed 's/[>=<].*//' | xargs)
         
         if ! pip show "$package_name" &> /dev/null; then
-            if [ "$MISSING_PACKAGES" = false ]; then
-                echo -e "${YELLOW}Missing packages detected:${NC}"
-                MISSING_PACKAGES=true
+            if [ "$missing" = false ]; then
+                echo -e "${YELLOW}Missing packages detected in $req_file:${NC}"
+                missing=true
             fi
             echo "  - $package_name"
         fi
-    done < "$PROJECT_DIR/requirements.txt"
+    done < "$req_file"
     
-    if [ "$MISSING_PACKAGES" = false ]; then
+    echo "$missing"
+}
+
+if [ -d "$VENV_DIR" ]; then
+    echo -e "${YELLOW}Virtual environment already exists.${NC}"
+    source "$VENV_DIR/bin/activate"
+    
+    # Check base packages
+    echo "Checking installed packages..."
+    base_missing=$(check_packages "$PROJECT_DIR/requirements.txt")
+    
+    # Check PyTorch packages
+    pytorch_missing=false
+    if ! pip show torch &> /dev/null; then
+        pytorch_missing=true
+        echo -e "${YELLOW}PyTorch not installed.${NC}"
+    fi
+    
+    if [ "$base_missing" = "false" ] && [ "$pytorch_missing" = false ]; then
         echo -e "${GREEN}All required packages are already installed.${NC}"
     else
-        echo -e "\n${YELLOW}Installing missing packages...${NC}"
-        pip install -r "$PROJECT_DIR/requirements.txt"
-        echo -e "${GREEN}Packages installed successfully.${NC}"
+        if [ "$base_missing" = "true" ]; then
+            echo -e "\n${YELLOW}Installing missing base packages...${NC}"
+            pip install -r "$PROJECT_DIR/requirements.txt"
+            echo -e "${GREEN}Base packages installed successfully.${NC}"
+        fi
+        
+        if [ "$pytorch_missing" = true ]; then
+            echo -e "\n${YELLOW}PyTorch installation required.${NC}"
+            echo "Do you want to install PyTorch with GPU (CUDA) support? (y/n)"
+            read -r use_gpu
+            
+            if [[ "$use_gpu" =~ ^[Yy]$ ]]; then
+                echo "Installing PyTorch with CUDA support..."
+                pip install -r "$PROJECT_DIR/requirements-gpu.txt"
+            else
+                echo "Installing PyTorch (CPU only)..."
+                pip install -r "$PROJECT_DIR/requirements-cpu.txt"
+            fi
+            echo -e "${GREEN}PyTorch installed successfully.${NC}"
+        fi
     fi
 else
     echo "Creating new virtual environment..."
@@ -64,9 +97,22 @@ else
     echo "Upgrading pip..."
     pip install --upgrade pip
     
-    echo "Installing required packages..."
+    echo "Installing base packages..."
     pip install -r "$PROJECT_DIR/requirements.txt"
-    echo -e "${GREEN}Virtual environment created and packages installed.${NC}"
+    echo -e "${GREEN}Base packages installed successfully.${NC}"
+    
+    echo -e "\nDo you want to install PyTorch with GPU (CUDA) support? (y/n)"
+    read -r use_gpu
+    
+    if [[ "$use_gpu" =~ ^[Yy]$ ]]; then
+        echo "Installing PyTorch with CUDA support..."
+        pip install -r "$PROJECT_DIR/requirements-gpu.txt"
+    else
+        echo "Installing PyTorch (CPU only)..."
+        pip install -r "$PROJECT_DIR/requirements-cpu.txt"
+    fi
+    echo -e "${GREEN}PyTorch installed successfully.${NC}"
+    echo -e "${GREEN}Virtual environment created and all packages installed.${NC}"
 fi
 
 # ============================
