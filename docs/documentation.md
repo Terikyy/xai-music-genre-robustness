@@ -4,6 +4,8 @@
 
 This project explores the robustness of a Convolutional Neural Network (CNN) for music genre classification and uses Grad-CAM for explainability analysis. The goal is to understand how adversarial perturbations affect model predictions and which spectrogram regions influence the decision-making process.
 
+**Note:** This project was developed with assistance from Claude Sonnet 4.5 (GitHub Copilot).
+
 ## Project Structure
 
 ```
