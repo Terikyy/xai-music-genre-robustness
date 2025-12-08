@@ -2,6 +2,9 @@
 # All other data content is reproducible from code
 /data/
 
+# Powerpoint presentation
+*.pptx
+
 # Trained models
 results/models/
 

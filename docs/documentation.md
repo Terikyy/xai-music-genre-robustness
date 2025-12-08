@@ -84,7 +84,7 @@ Two adversarial attack methods were implemented using the Adversarial Robustness
 Single-step attack using gradient sign to generate perturbations.
 
 ### 2. PGD (Projected Gradient Descent)
-Multi-step iterative attack (10 iterations) for stronger perturbations.
+Multi-step iterative attack (40 iterations) for stronger perturbations.
 
 ### Attack Results (200 test samples, clean accuracy: 82%)
 
