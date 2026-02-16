@@ -5,10 +5,6 @@
 **Course:** Explainable AI  
 **University:** DHBW Stuttgart  
 
-**Name:** Erik von Heyden  
-**Email:** inf23066@lehre.dhbw-stuttgart.de  
-**Student ID:** 8720832  
-
 **GitHub:** [xai-music-genre-robustness](https://github.com/Terikyy/xai-music-genre-robustness)
 
 ## Research Question
